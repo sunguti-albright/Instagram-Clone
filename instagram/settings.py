@@ -9,8 +9,15 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from decouple import config,Csv
 from pathlib import Path
+import django_heroku
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'instaapp.apps.InstaappConfig',
+    # 'bootstrap3',
+    'crispy_forms',
+    'cloudinary',
+
 ]
 
 MIDDLEWARE = [
@@ -75,8 +87,10 @@ WSGI_APPLICATION = 'instagram.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'instagram',
+        'USER': 'albrighthuman',
+        'PASSWORD':'bright'
     }
 }
 
@@ -105,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -118,3 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+cloudinary.config( 
+  cloud_name = "albrighthuman", 
+  api_key = "855458957337641", 
+  api_secret = "L2sDfraxDlrpo2ieBM88pttDwbY" 
+)
