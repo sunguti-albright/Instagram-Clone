@@ -1,11 +1,12 @@
-from re import U
-from typing import Pattern
-from urllib.parse import urlparse
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from . import views
-from django.urls import URLPattern, path, include
+from django.urls import path, include
 
 urlpatterns=[
     url(r'^$',views.index,name = 'index'),
-]
+    url(r'^register/',views.register,name = 'register'),
+    url(r'^login/',auth_views.LoginView.as_view(template_name='users/login.html'),name = 'login'),
+    url(r'^logout/',auth_views.LogoutView.as_view(template_name='users/logout.html'),name = 'logout'),
+   
+] 
