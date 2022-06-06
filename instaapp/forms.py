@@ -9,3 +9,27 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_photo']
+
+class ImageUploadForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ['gallery_image', 'image_name', 'image_caption' ]
+
+    def form_valid(self, form):
+        form.instance.user = self.request.profile
+        return super().form_valid(form)
+
+
+  
