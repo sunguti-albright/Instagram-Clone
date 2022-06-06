@@ -22,14 +22,5 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['profile_photo']
 
-class ImageUploadForm(forms.ModelForm):
-    class Meta:
-        model = Image
-        fields = ['gallery_image', 'image_name', 'image_caption' ]
-
-    def form_valid(self, form):
-        form.instance.user = self.request.profile
-        return super().form_valid(form)
-
 
   
