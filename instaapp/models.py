@@ -15,3 +15,20 @@ class Profile(models.Model):
 
     def save_profile(self):
         self.save()
+
+    def delete_profile(self):
+        self.delete()
+
+    @classmethod
+    def update_bio(cls,id, bio):
+        update_profile = cls.objects.filter(id = id).update(bio = bio)
+        return update_profile
+    
+    @classmethod
+    def search_profile(cls, search_term):
+        profs = cls.objects.filter(user__username__icontains=search_term)
+        return profs
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
