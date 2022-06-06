@@ -67,21 +67,3 @@ def update(request):
     }
     return render(request, 'users/update.html', context)
 
-def image(request,image_id):
-    try:
-        image = Image.objects.get(id = image_id)
-    except ObjectDoesNotExist:
-        raise Http404()
-    return render(request,"image.html", {"image":image})
-
-@login_required
-def search_results(request):
-    if 'profile' in request.GET and request.GET["profile"]:
-        search_term = request.GET.get("profile")
-        searched_profiles = Profile.search_profile(search_term)
-        message = f"{search_term}"
-        return render(request, 'search.html', {"message":message,"profiles": searched_profiles})
-    else:
-        message = "You haven't searched for any profile"
-    return render(request, 'search.html', {'message': message})
-
