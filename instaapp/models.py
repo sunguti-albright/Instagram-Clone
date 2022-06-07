@@ -32,3 +32,84 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
+class Image(models.Model):
+    gallery_image = CloudinaryField('gallery_image', null=True)
+    image_name = models.CharField(max_length =30, null=True)
+    image_caption = models.CharField(max_length =70, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    liked = models.ManyToManyField(User, related_name='likes', blank=True, )
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='images', null=True)
+
+    class Meta:
+        '''
+        Class method to display images by date published
+        '''
+        ordering = ['pub_date']
+
+    def save_image(self):
+        '''
+        Method to save our images
+        '''
+        self.save()
+
+    def delete_image(self):
+        '''
+        Method to delete our images
+        '''
+        self.delete()
+
+    @property
+    def num_liked(self):
+        return self.liked.all().count()
+
+    @classmethod
+    def update_caption(cls, self, caption):
+        update_cap = cls.objects.filter(id = id).update(caption = caption)
+        return update_cap
+
+    def __str__(self):
+        return self.image_name
+
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike'),
+)
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, null = True)
+    value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10, null = True)
+
+    def __str__(self):
+        return self.image
+
+class Subscribers(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()
+
+class Follow(models.Model):
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following')
+    followed = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followers')
+
+    def __str__(self):
+        return f'{self.follower} Follow'
+
+class Comment(models.Model):
+    comment = models.TextField()
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    created = models.DateTimeField(auto_now_add=True, null=True)
+
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        self.delete()
+
+    @classmethod
+    def get_comments(cls,id):
+        comments = cls.objects.filter(image__id=id)
+        return comments
+
+    def __str__(self):
+        return self.comment
