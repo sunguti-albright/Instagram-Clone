@@ -13,7 +13,13 @@
             <br><br>
             <p><strong>Caption:</strong> {{image.image_caption}}</p>
             <p><strong>Posted:</strong> {{image.pub_date}}</p> 
-          
+            {% for comment in comments %}
+            {% if comment.image_id == image.id%}
+            <p><strong>Comments:</strong></p>
+            <p><strong>{{comment.user}}:</strong> {{comment.comment}}</p>
+            <p>{{comment.posted | timesince}}</p><hr>
+            {% endif %}
+            {% endfor %}
         <a href=" {% url 'comment' image_id=image.id %}"><i class="fa fa-comment fa-2x"></i>Add a comment</a><br><br>
         <a href="{% url 'index' %}" class="btn btn-primary">Back to Home Page</a><br>
     </div>

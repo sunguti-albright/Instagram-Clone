@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'index' %}">InstaClone</a>
+    <a class="navbar-brand" href="{% url 'index' %}" id="Instagram"><img src="https://img.icons8.com/fluency/48/undefined/instagram-new.png"/>InstaGram</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,14 +8,15 @@
         {% if user.is_authenticated %}
 
         <li class="nav-item active">
-          <a class="nav-link" href="{%url 'profile'%}">Profile <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{%url 'profile'%}"><i class="fa fa-user" aria-hidden="true"></i>
+            Profile <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{%url 'logout'%}">Logout</a>
+          <a class="nav-link" href="{%url 'logout'%}"><img src="https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/67/undefined/external-logout-arrow-line-royyan-wijaya-detailed-outline-royyan-wijaya.png"/>Logout</a>
         </li>
         {% else %}
         <li class="nav-item">
-            <a class="nav-link" href="{%url 'login'%}">Logout</a>
+            <a class="nav-link" href="{%url 'login'%}"><img src="https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/67/undefined/external-logout-arrow-line-royyan-wijaya-detailed-outline-royyan-wijaya.png"/>Logout</a>
         </li>
       </ul>
       {% endif %}
