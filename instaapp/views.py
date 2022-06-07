@@ -29,12 +29,11 @@ def register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
             username = form.cleaned_data.get('username')
             email = form.cleaned_data['email']
             recipient = Subscribers(name = username,email =email)
             recipient.save()
-            # send_welcome_email(username,email)
+            send_welcome_email(username,email)
             messages.success(request, f'Successfully created account created for {username}! Please log in to continue')
             return redirect('login')
     else:
