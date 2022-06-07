@@ -26,3 +26,16 @@ class ImageClassTest(TestCase):
     def test_save_image(self):
         image = Image.objects.all()
         self.assertTrue(len(image)>0)
+
+class CommentsTest(TestCase):
+    def setUp(self):
+        self.new_user = User(username='albright', email='albright@gmail.com', password='travisasutsa01')
+        self.new_image = Image(user='albright', image='', caption='albright.human', profile=self.new_user)
+        self.new_comment = Comment(comment='Awesome!!!',image=self.new_image,user=self.new_user)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_comment, Comment))
+
+    def test_save_comment(self):
+        comment = Comment.objects.all()
+        self.assertTrue(len(comment)>0)
