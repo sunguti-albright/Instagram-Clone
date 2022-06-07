@@ -23,7 +23,7 @@ def index(request):
             return redirect('index')
     else:
         form = ImageUploadForm()
-    return render(request, 'index.html', {"images":images[::-1], "form": form, "users": users, "comments": comments })
+    return render(request, 'index.html', {"images":images[::-1], "form": form, "users": users, "comments": comments})
 
 def register(request):
     if request.method == "POST":
