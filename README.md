@@ -79,8 +79,8 @@ Install dependancies that will create an environment for the app to run
 #### Make and run migrations
 ```bash
 python3 manage.py check
-python manage.py makemigrations news
-python3 manage.py sqlmigrate news 0001
+python manage.py makemigrations instaapp
+python3 manage.py sqlmigrate instaapp 0001
 python3 manage.py migrate
 ```
 
