@@ -46,8 +46,11 @@ INSTALLED_APPS = [
     # 'bootstrap3',
     'crispy_forms',
     'cloudinary',
+    'tailwind',
+    'theme'
 
 ]
+TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,6 +83,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'instagram.wsgi.application'
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
